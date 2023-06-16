@@ -20,7 +20,9 @@ ibmcloud config --check-version=false
 ibmcloud plugin install -f container-registry
 ibmcloud plugin install -f kubernetes-service
 
-ibmcloud login -r "${IBM_REGION}" --apikey "${API_KEY_QE}"
+# ibmcloud login -r "${IBM_REGION}" --apikey "${API_KEY_QE}"
+ibmcloud login -r "${IBM_REGION}" -g "${IBM_RSC_GROUP}" --apikey "${SERVICE_ID_API_KEY}"
+
 ibmcloud ks cluster config --cluster "${IKS_CLUSTER_ID}"
 
 install_kubectl() {
@@ -67,7 +69,9 @@ helm version
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add backstage https://backstage.github.io/charts
 helm repo update
-helm install -n backstage --create-namespace backstage backstage/backstage -f ./helm/values-k8s-ingress.yaml --wait
+# helm install -n backstage --create-namespace backstage backstage/backstage -f ./helm/values-k8s-ingress.yaml --wait
+helm upgrade -i backstage backstage/backstage -n backstage --wait
+kubectl get pods -n backstage
 
 kubectl port-forward -n backstage svc/backstage 7007:7007 &
 # Store the PID of the background process
