@@ -1,5 +1,6 @@
 #!/bin/bash
 LOGFILE="pr-${GIT_PR_NUMBER}-kubernetes-tests-${BUILD_NUMBER}"
+echo "Log file: ${LOGFILE}"
 # source ./.ibm/pipelines/functions.sh
 
 # install the latest ibmcloud cli on Linux
