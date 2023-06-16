@@ -20,9 +20,7 @@ ibmcloud config --check-version=false
 ibmcloud plugin install -f container-registry
 ibmcloud plugin install -f kubernetes-service
 
-# ibmcloud login -r "${IBM_REGION}" --apikey "${API_KEY_QE}"
 ibmcloud login -r "${IBM_REGION}" -g "${IBM_RSC_GROUP}" --apikey "${SERVICE_ID_API_KEY}"
-
 ibmcloud ks cluster config --cluster "${IKS_CLUSTER_ID}"
 
 install_kubectl() {
